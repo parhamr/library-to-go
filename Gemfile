@@ -2,10 +2,9 @@ source 'http://rubygems.org'
 gem 'mysql2'
 gem 'rails', '3.2.6'
 gem 'rack'
-gem 'chef'
 gem 'devise'
+gem 'devise-encryptable'
 gem 'cancan'
-gem 'jammit'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
 gem 'will_paginate'
@@ -78,8 +77,9 @@ group :test do
   gem 'launchy'
   gem 'timecop'
   gem 'database_cleaner'
-  gem 'timecop'
   gem 'simplecov', :require => false
   gem 'headless'
+  gem 'json_spec'
+  gem 'prickle'
 end
 

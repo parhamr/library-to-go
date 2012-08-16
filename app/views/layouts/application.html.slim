@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title = page_title
+    meta charset="utf-8"
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  body class="#{params[:controller]} #{params[:action]}"
+
+  .notice = notice
+  .alert = alert
+  = yield

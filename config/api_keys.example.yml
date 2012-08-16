@@ -1,0 +1,14 @@
+development:
+  amazon:
+    api_key: 123
+    api_secret: ABC
+  google_accounts:
+    consumer_key: domain
+    consumer_secret: secret
+test:
+  amazon:
+    api_key: 123
+    api_secret: ABC
+  google_accounts:
+    consumer_key: domain
+    consumer_secret: secret
