@@ -2,9 +2,11 @@
 # More info at https://github.com/guard/guard#readme
 
 guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test'}, :wait => 30, :cucumber => false, :bundler => false do
+  callback(:start_begin) { TerminalNotifier::Guard.pending('Starting spork…') }
   watch('config/application.rb')
   watch('config/environment.rb')
   watch(%r{^config/.+\.rb$})
+  watch(%r{^db/seeds.rb$})
   watch('config/locales/*.yml')
   watch(%r{^config/environments/.+\.rb$})
   watch(%r{^config/initializers/.+\.rb$})

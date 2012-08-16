@@ -13,7 +13,7 @@ module LibraryToGo
     config.plugins = [:ssl_requirement]
 
     #config.active_record.observers = :cacher
-    config.i18n.default_locale = :de
+    config.i18n.default_locale = :en
     config.encoding = "utf-8"
 
     config.filter_parameters += [:password, :password_confimation]

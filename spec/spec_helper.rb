@@ -40,12 +40,14 @@ Spork.prefork do
   RSpec.configure do |config|
     config.order = "random"
     config.mock_with :rspec
-    config.use_transactional_fixtures = true
-
+    config.use_transactional_fixtures = false
+    
     # Database cleaner!
     # https://gist.github.com/1793911
     config.before(:suite) do
-      DatabaseCleaner.strategy = :deletion
+      DatabaseCleaner.clean_with :truncation
+      DatabaseCleaner.strategy = :transaction
+      load "#{Rails.root}/db/seeds.rb"
     end
 
     config.before(:each) do

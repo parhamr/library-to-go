@@ -1,0 +1,51 @@
+p#notice = notice
+
+p
+  strong Email:
+  = @user.email
+p
+  strong Title:
+  = @user.title
+p
+  strong First name:
+  = @user.first_name
+p
+  strong Last name:
+  = @user.last_name
+p
+  strong Description:
+  = @user.description
+p
+  strong Phone:
+  = @user.phone
+p
+  strong Company:
+  = @user.company
+p
+  strong Address1:
+  = @user.address1
+p
+  strong Address2:
+  = @user.address2
+p
+  strong Locality:
+  = @user.locality
+p
+  strong Region:
+  = @user.region
+p
+  strong Country:
+  = @user.country
+p
+  strong Postal code:
+  = @user.postal_code
+p
+  strong Time zone:
+  = @user.time_zone
+p
+  strong Birthday:
+  = @user.birthday
+
+= link_to 'Edit', edit_user_path(@user)
+'|
+= link_to 'Back', users_path

@@ -5,6 +5,7 @@ gem 'rack'
 gem 'devise'
 gem 'devise-encryptable'
 gem 'cancan'
+gem 'cantango'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
 gem 'will_paginate'
@@ -19,15 +20,16 @@ gem 'nokogiri'
 gem 'paperclip'
 gem 'prawn'
 gem 'sprockets'
-gem 'slim'
+gem 'slim-rails'
 gem 'json'
 gem 'transitions', :require => ['transitions', 'active_record/transitions']
-gem 'sass'
+gem 'date_validator'
 gem 'settingslogic'
 gem 'acts-as-taggable-on'
 gem 'jquery-rails'
 gem 'linguistics'
 gem 'i18n'
+gem 'sass'
 gem 'fb_graph'
 gem 'linkedin'
 gem 'calendar_date_select'
@@ -43,6 +45,8 @@ gem 'recaptcha'
 gem 'rakismet'
 gem 'disqus'
 gem 'acts_as_rateable'
+
+is_buntu = `uname -a` =~ /buntu/
 
 group :development do
   gem 'rack-contrib', :require => 'rack/contrib'
@@ -63,6 +67,7 @@ group :development, :test do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-livereload'
+  gem 'terminal-notifier-guard'
 end
 
 group :test do
