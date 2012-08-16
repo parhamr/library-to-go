@@ -6,19 +6,18 @@ Open source integrated library system (ILS).
 Feature TODOs
 =============
 
-* pagination
-* search
-* taggings
-* email notifications
-* scheduling and automation
+* pagination — will_paginate
+* search — Sphinx
+* taggings — acts_as_taggable_on
+* email notifications — sidekiq workers
+* scheduling and automation — clockwork
 * admin cms
 * moderation, acquisition queues
-* import and export
+* import and export — FasterCSV?
 * circulation
 * i18n
-* reporting and visualization
-* image processing
-* anonymizing, or safer logging
+* reporting and visualization — ruport, googlecharts
+* image processing — rmagick
 * backups
 * check out
 * check in
