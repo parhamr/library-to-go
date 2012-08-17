@@ -1,5 +1,15 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Role do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of(:name) }
+  it { should validate_uniqueness_of(:name) }
+  
+  describe "#name=" do
+    it 'strips whitespace' do
+      subject.name = 'test '
+      subject.name.should == 'test'
+    end
+  end
 end
