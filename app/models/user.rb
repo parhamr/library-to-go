@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, 
           :validatable, :omniauthable, :lockable, :timeoutable
 
-  has_and_belongs_to_many :roles, :readonly => true
+  has_and_belongs_to_many :roles,
+                            :readonly => true,
+                            :validate => false
 
   attr_accessible :address1, :address2, :birthday, :company, :country, :description,
                   :first_name, :last_name, :locality, :phone, :postal_code, :region,
