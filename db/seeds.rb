@@ -2,8 +2,22 @@
 
 randkey = SecureRandom.hex(24)
 
-['admin','member'].each do |name|
-  role = Role.create!({:name => name}, :as => :root)
+roles = [
+  {
+    :name => 'admin',
+    :description => 'Admins are granted the ability to manage almost all record types.',
+  },
+  {
+    :name => 'staff',
+    :description => 'Staff are users with basic elevated privileges.'
+  },
+  {
+    :name => 'member',
+    :description => 'Members are standard users.'
+  }
+]
+roles.each do |r|
+  role = Role.create!(r, :as => :root)
 end
 
 users = [

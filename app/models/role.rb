@@ -6,7 +6,7 @@ class Role < ActiveRecord::Base
                             :readonly => true,
                             :validate => false
 
-  attr_accessible :name, :as => :root
+  attr_accessible :name, :description, :as => :root
 
   validates :name, :uniqueness => true
   validates :name , :presence => true

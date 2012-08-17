@@ -14,9 +14,10 @@
 ActiveRecord::Schema.define(:version => 20120817015725) do
 
   create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name",        :null => false
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "roles_users", :id => false, :force => true do |t|
@@ -27,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20120817015725) do
   add_index "roles_users", ["role_id", "user_id"], :name => "index_roles_users_on_role_id_and_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email"
+    t.string   "email",                                  :null => false
     t.string   "title"
     t.string   "first_name"
     t.string   "last_name"
@@ -41,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20120817015725) do
     t.string   "country"
     t.string   "postal_code"
     t.string   "time_zone"
-    t.datetime "birthday"
+    t.date     "birthday"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "encrypted_password",     :default => "", :null => false

@@ -1,7 +1,8 @@
 class CreateRoles < ActiveRecord::Migration
   def change
     create_table :roles do |t|
-      t.string :name, :uniq => true
+      t.string :name, :uniq => true, :null => false
+      t.text :description
 
       t.timestamps
     end
