@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Admin::RolesController do
-  let(:admin_role) { create(:admin_role) }
-  let(:member_role) { create(:member_role) }
+  let(:admin_role) { Role.find_by_name('admin') }
+  let(:member_role) { Role.find_by_name('member') }
 
   describe "GET 'index'" do
     it "returns http success" do

@@ -47,6 +47,38 @@ describe User do
         admin.role?('admin').should be_true
       end
     end
+
+  end
+
+  describe "abilities" do
+    subject { ability }
+    let(:ability) { Ability.new(user) }
+
+    context "as admin" do
+      let(:user) { create(:admin) }
+
+      it{ should be_able_to(:manage, User) }
+
+      it{ should be_able_to(:read, Role) }
+      it{ should be_able_to(:create, Role) }
+      it{ should be_able_to(:update, Role) }
+      it{ should_not be_able_to(:destroy, Role) }
+    end
+
+    context "as member" do
+      let(:user) { create(:member) }
+
+      it{ should be_able_to(:read, User) }
+      it{ should be_able_to(:update, user) }
+      it{ should_not be_able_to(:update, User.new) }
+      it{ should_not be_able_to(:create, User) }
+      it{ should_not be_able_to(:destroy, User.new) }
+
+      it{ should be_able_to(:read, Role) }
+      it{ should_not be_able_to(:create, Role) }
+      it{ should_not be_able_to(:update, Role) }
+      it{ should_not be_able_to(:destroy, Role) }
+    end
   end
   
 end

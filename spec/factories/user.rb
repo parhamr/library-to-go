@@ -11,11 +11,11 @@ FactoryGirl.define do
     password_confirmation 'password'
 
     trait(:member) do
-      after(:create) { |user, ev| user.roles << create(:member_role) }
+      after(:create) { |user, ev| user.roles << Role.find_by_name('member') }
     end
 
     trait(:admin) do
-      after(:create) { |user, ev| user.roles << create(:admin_role) }
+      after(:create) { |user, ev| user.roles << Role.find_by_name('admin') }
     end
 
     trait(:located) do

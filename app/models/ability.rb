@@ -14,6 +14,7 @@ class Ability
     if user.role?('admin')
       # create and update anything
       can [:create, :update], :all
+      can [:manage], User
       # read anything
       can [:read], :all
     end
