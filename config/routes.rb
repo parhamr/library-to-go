@@ -4,13 +4,11 @@ LibraryToGo::Application.routes.draw do
 
   devise_for :users
 
-  resources :users
-
-  get "static/index"
-
   require 'sidekiq/web'
   require 'sidekiq/util'
   mount Sidekiq::Web => '/sidekiq'
+
+  root :to => 'static#index'
 
   match '/auth/:provider/callback' => 'authentications#create'
 
@@ -21,16 +19,17 @@ LibraryToGo::Application.routes.draw do
   end
 
   namespace :admin do
-    match 'home' => 'home#index'
+    match 'home' => 'static#index'
     resources :users
     resources :pages
+    resources :roles
     # TODO: payment integration
-    resources :purchases
-    resources :line_items
-    resources :payments
+    #resources :purchases
+    #resources :line_items
+    #resources :payments
   end
 
-  root :to => 'static#index'
+  resources :users
 
   controller :pages do
     get '/legal' => :legal

@@ -59,6 +59,8 @@ group :development do
 end
 
 group :development, :test do
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'debugger'
   gem 'rspec-rails'
   gem 'thin'
@@ -72,10 +74,8 @@ end
 
 group :test do
   gem 'rspec-pride'
-  gem 'factory_girl', '~> 2'
-  gem 'factory_girl_rails', '~> 1'
-  gem 'webmock', '~> 1.8'
-  gem 'vcr', '~> 2.1'
+  gem 'webmock'
+  gem 'vcr'
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'capybara-webkit'

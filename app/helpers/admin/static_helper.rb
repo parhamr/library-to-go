@@ -1,0 +1,2 @@
+module Admin::StaticHelper
+end

@@ -9,8 +9,12 @@ describe User do
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
 
+  it { should have_and_belong_to_many(:roles) }
+  
+
   describe "instance method" do
-    subject { Factory(:user) }
+    subject { create(:user) }
+    let(:admin) { create(:admin) }
   
     describe "#email" do
       it 'strips whitespace' do
@@ -35,6 +39,12 @@ describe User do
       it 'strips whitespace' do
         subject.last_name = 'test '
         subject.last_name.should == 'test'
+      end
+    end
+
+    describe "#role?" do
+      it "detects admins" do
+        admin.role?('admin').should be_true
       end
     end
   end
