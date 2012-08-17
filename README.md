@@ -10,7 +10,7 @@ Goals
 
 LibraryToGo will have all critical features of an ILS, but re-imagined from an outsider’s perspective. [Koha](https://github.com/liblime/LibLime-Koha) [v 3.8](http://manual.koha-community.org/3.8/en/) is the reference list of features and performance. [LibraryFind](http://libraryfind.org/) is a reference for implementation and design considerations.
 
-LibraryToGo will be developed using contemporary open source practices and seek maintainability. Code will be covered and tested. The deployment will be effortless.
+LibraryToGo will be developed using contemporary open source practices and seek maintainability. Code will be covered and tested. The deployment will be effortless. Dependencies will be reasonable and integrated with version control and/or software packaging services.
 
 Considerations
 =============
@@ -22,6 +22,12 @@ Considerations
 * Business rules in centralized configurations
 * Users need persistable and replaceable authentication tokens, as ID cards get lost
 * This facilitates in-real-life operations; (almost) everything relates to timings and quantities
+
+Privacy concerns
+=============
+
+* aggregate counts are generally not sensitive (number of times record X has done Y) and can be stored with their parent record
+* any record that serializes users’ actions should be sensitive (reads should be restricted to privileged users) and the structure of this serialization allows class-level restrictions
 
 Feature TODOs
 =============

@@ -19,6 +19,11 @@ class Ability
       can [:read], :all
     end
 
+    # PRIVACY: limit each publishing action of users under configurable ages
+    # example: comments can only be written by users older than X
+    # example: comments can only be read by users older than Y
+    # example: items can only be circulated to users older than Z
+
     # read anything
     can [:read], :all
   end

@@ -20,6 +20,24 @@ class User < ActiveRecord::Base
   validates :email, :first_name, :last_name, :presence => true
   validates :email, :uniqueness => true
 
+  ### COUNTERS
+  # count of items checked out, total (because this references sensitive records)
+  # count of items checked out, current (because this references sensitive records)
+  # count of searches performed (because this references sensitive records)
+  # count of items damaged (for quick reporting)
+  # count of holds (for quick reporting)
+  # aggregate fees levied by type
+
+  ### DO NOT (directly) STORE
+  # search terms
+  # which records have been viewed
+  # plaintext passwords (obvious)
+  # social security number
+
+  ### CONSIDER STORING
+  # sex and ethnicity for general statistics
+  # 
+
   def email=(str)
     # remove whitespace
     write_attribute(:email, str.strip) if str.present?
