@@ -11,6 +11,7 @@ development:
 test:
   <<: *defaults
   database: library_to_go_test
+  min_messages: WARNING
 
 staging:
   <<: *defaults
