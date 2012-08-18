@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-gem 'mysql2'
+gem 'pg'
 gem 'rails', '3.2.6'
 gem 'rack'
 gem 'devise'

@@ -1,9 +1,7 @@
 defaults: &defaults
-  adapter: mysql2
-  username: root
+  adapter: postgresql
+  username: postgresql
   password: 
-  host: localhost
-  port: 3306
   encoding: utf8
 
 development: 
@@ -13,3 +11,8 @@ development:
 test:
   <<: *defaults
   database: library_to_go_test
+
+staging:
+  <<: *defaults
+  database: library_to_go_staging
+  min_messages: WARNING

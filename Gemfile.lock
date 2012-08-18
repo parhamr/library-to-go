@@ -187,7 +187,6 @@ GEM
     mime-types (1.19)
     multi_json (1.3.6)
     multi_xml (0.5.1)
-    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -213,6 +212,7 @@ GEM
     pdf-writer (1.1.8)
       color (>= 1.4.0)
       transaction-simple (~> 1.3)
+    pg (0.14.0)
     polyglot (0.3.3)
     prawn (0.12.0)
       pdf-reader (>= 0.9.0)
@@ -421,10 +421,10 @@ DEPENDENCIES
   linguistics
   linkedin
   mailcatcher
-  mysql2
   nokogiri
   omniauth
   paperclip
+  pg
   prawn
   prickle
   prism

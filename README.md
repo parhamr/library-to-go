@@ -12,6 +12,15 @@ LibraryToGo will have all critical features of an ILS, but re-imagined from an o
 
 LibraryToGo will be developed using contemporary open source practices and seek maintainability. Code will be covered and tested. The deployment will be effortless. Dependencies will be reasonable and integrated with version control and/or software packaging services.
 
+Dependencies
+=============
+
+See Gemfile and Gemfile.lock
+
+* Rails 3+
+* PostgreSQL 8+
+* Sphinx 2+ with PostgreSQL support compiled
+
 Considerations
 =============
 
