@@ -11,9 +11,9 @@ class Role < ActiveRecord::Base
   validates :name, :uniqueness => true
   validates :name , :presence => true
 
-  def name=(str)
+  def name=(str=nil)
     # remove whitespace
-    write_attribute(:name, str.strip) if str.present?
+    write_attribute(:name, str.try(:strip))
   end
 
 end

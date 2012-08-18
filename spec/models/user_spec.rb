@@ -10,35 +10,57 @@ describe User do
   it { should validate_presence_of(:last_name) }
 
   it { should have_and_belong_to_many(:roles) }
-  
 
   describe "instance method" do
     subject { create(:user) }
     let(:admin) { create(:admin) }
   
     describe "#email" do
-      it 'strips whitespace' do
-        subject.email = 'test@example.org '
-        subject.email.should == 'test@example.org'
-      end
-
       it 'sets errors on invalid formatting' do
         subject.email = 'invalid||||||example.com'
         subject.should have_at_least(1).errors_on(:email)
       end
     end
+
+    describe "#email=" do
+      it 'strips whitespace' do
+        subject.email = 'test@example.org '
+        subject.email.should == 'test@example.org'
+      end
+
+      it 'does not raise NilClass errors' do
+        lambda {
+          subject.email = nil
+          subject.email.should == nil
+        }.should_not raise_error
+      end
+    end
     
-    describe "#first_name" do
+    describe "#first_name=" do
       it 'strips whitespace' do
         subject.first_name = 'test '
         subject.first_name.should == 'test'
       end
+      
+      it 'does not raise NilClass errors' do
+        lambda {
+          subject.first_name = nil
+          subject.first_name.should == nil
+        }.should_not raise_error
+      end
     end
     
-    describe "#last_name" do
+    describe "#last_name=" do
       it 'strips whitespace' do
         subject.last_name = 'test '
         subject.last_name.should == 'test'
+      end
+
+      it 'does not raise NilClass errors' do
+        lambda {
+          subject.last_name = nil
+          subject.last_name.should == nil
+        }.should_not raise_error
       end
     end
 

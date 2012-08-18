@@ -49,17 +49,17 @@ class User < ActiveRecord::Base
 
   def email=(str)
     # remove whitespace
-    write_attribute(:email, str.strip) if str.present?
+    write_attribute(:email, str.try(:strip))
   end
 
-  def first_name=(str)
+  def first_name=(str=nil)
     # remove whitespace
-    write_attribute(:first_name, str.strip) if str.present?
+    write_attribute(:first_name, str.try(:strip))
   end
 
-  def last_name=(str)
+  def last_name=(str=nil)
     # remove whitespace
-    write_attribute(:last_name, str.strip) if str.present?
+    write_attribute(:last_name, str.try(:strip))
   end
 
   # Is this user associated with the passed role?
