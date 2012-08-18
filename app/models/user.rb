@@ -1,13 +1,19 @@
 # encoding: utf-8
 
 class User < ActiveRecord::Base
+  # INTEGRATIONS
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, 
           :validatable, :omniauthable, :lockable, :timeoutable
+  acts_as_tagger
+  acts_as_ordered_taggable_on :languages
 
+  # ASSOCIATIONS
   has_and_belongs_to_many :roles,
                             :readonly => true,
                             :validate => false
 
+  # SECURITY
+  # these are exposed for mass-assignment
   attr_accessible :address1, :address2, :birthday, :company, :country, :description,
                   :first_name, :last_name, :locality, :phone, :postal_code, :region,
                   :time_zone, :title, :remember_me
@@ -17,6 +23,7 @@ class User < ActiveRecord::Base
                   :time_zone, :title, :remember_me,
                   :email, :password, :password_confirmation, :role_ids, :as => :root
 
+  # VALIDATIONS
   validates :email, :first_name, :last_name, :presence => true
   validates :email, :uniqueness => true
 
@@ -37,6 +44,8 @@ class User < ActiveRecord::Base
   ### CONSIDER STORING
   # sex and ethnicity for general statistics
   # 
+
+  # INSTANCE METHODS
 
   def email=(str)
     # remove whitespace

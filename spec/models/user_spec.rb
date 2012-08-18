@@ -80,5 +80,27 @@ describe User do
       it{ should_not be_able_to(:destroy, Role) }
     end
   end
+
+  describe "taggings" do
+    subject { create(:user) }
+
+    context "for languages" do
+      let(:languages) { 'english, klingon' }
+      it "are empty by default" do
+        subject.language_list.should == []
+      end
+
+      it "allows users to identify relevant languages" do
+        subject.language_list = languages
+        subject.language_list.should == ['english','klingon']
+      end
+
+      it "enables lookups on relevant languages" do
+        subject.update_attributes({:language_list => languages}, :without_protection => true)
+        User.tagged_with('klingon', :on => :languages).should == [subject]
+      end
+
+    end
+  end
   
 end

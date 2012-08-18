@@ -30,6 +30,8 @@ module LibraryToGo
 
     config.after_initialize do
       API_KEYS = YAML.load_file("#{::Rails.root}/config/api_keys.yml")[::Rails.env] unless defined?(API_KEYS) == 'constant'
+      
+      ActsAsTaggableOn.force_lowercase = true
     end
   end
 end
