@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
   # VALIDATIONS
   validates :email, :first_name, :last_name, :presence => true
   validates :email, :uniqueness => true
+  validates :birthday,
+    :date => {:before => Date.today},
+    :allow_nil => true
 
   ### COUNTERS
   # count of items checked out, total (because this references sensitive records)

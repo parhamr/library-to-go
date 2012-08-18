@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120818010224) do
+ActiveRecord::Schema.define(:version => 20120818015711) do
+
+  create_table "pages", :force => true do |t|
+    t.string   "title",                         :null => false
+    t.string   "slug"
+    t.text     "contents"
+    t.datetime "visible_at"
+    t.datetime "hidden_at"
+    t.string   "state",      :default => "new", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "pages", ["slug"], :name => "index_pages_on_slug"
+  add_index "pages", ["state"], :name => "index_pages_on_state"
+  add_index "pages", ["visible_at", "hidden_at"], :name => "index_pages_on_visible_at_and_hidden_at"
 
   create_table "roles", :force => true do |t|
     t.string   "name",        :null => false

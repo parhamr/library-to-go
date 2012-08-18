@@ -1,0 +1,31 @@
+h1 Listing pages
+
+table
+  tr
+    th Title
+    th Slug
+    th Contents
+    th Visible at
+    th Hidden at
+    th State
+    th User
+    th
+    th
+    th
+
+  - @pages.each do |page|
+    tr
+      td = page.title
+      td = page.slug
+      td = page.contents
+      td = page.visible_at
+      td = page.hidden_at
+      td = page.state
+      td = page.user
+      td = link_to 'Show', page
+      td = link_to 'Edit', edit_admin_page_path(page)
+      td = link_to 'Destroy', page, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Page', new_admin_page_path

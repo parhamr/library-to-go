@@ -40,7 +40,7 @@ LibraryToGo::Application.routes.draw do
     get '/faq' => :faq
     get '/:slug' => :show
     # Handles the case of testing the action itself
-    get :show if Rails.env.test?
+    #get :show if Rails.env.test?
   end
 
 end
