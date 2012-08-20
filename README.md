@@ -52,7 +52,8 @@ This codebase can provide code coverage analysis. Use `COVERAGE=true bundle exec
 
 ## Feature TODOs
 
-* search — [Sphinx](http://sphinxsearch.com/) and [Thinking Sphinx](https://rubygems.org/gems/thinking-sphinx)
+* Dublin Core — https://en.wikipedia.org/wiki/Dublin_Core
+* search — [Sphinx](http://sphinxsearch.com/) and [Thinking Sphinx](https://rubygems.org/gems/thinking-sphinx); specifically, [faceted search](https://en.wikipedia.org/wiki/Faceted_search)
 * taggings — [acts-as-taggable-on](https://rubygems.org/gems/acts-as-taggable-on)
 * automation and notifications — [sidekiq](https://rubygems.org/gems/sidekiq)
 * admin cms
