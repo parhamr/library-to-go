@@ -8,7 +8,7 @@ LibraryToGo::Application.routes.draw do
   require 'sidekiq/util'
   mount Sidekiq::Web => '/sidekiq'
 
-  root :to => 'static#index'
+  root :to => 'pages#home'
 
   match '/auth/:provider/callback' => 'authentications#create'
 

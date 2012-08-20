@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
 
   # Is this user associated with the passed role?
   def role?(str)
-    roles.where( :name => str.downcase ).count > 0
+    str.blank? || roles.where( :name => str.downcase ).count > 0
   end
 
 end

@@ -1,6 +1,11 @@
 # encoding: utf-8
 
 class PagesController < ApplicationController
+
+  def home
+    
+  end
+
   def show
     @page = Page.find_by_slug(params[:slug].downcase)
 
