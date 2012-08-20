@@ -1,9 +1,9 @@
 # LibraryToGo
-=============
 
 Open source integrated library system (ILS) built with Ruby on Rails on a threaded stack. It treats patron experience and search as its core competency while supporting day-to-day operations.
 
 The project’s name is not final.
+
 
 ## Goals
 
@@ -11,8 +11,8 @@ LibraryToGo will have all critical features of an ILS, but re-imagined from an o
 
 LibraryToGo will be developed using contemporary open source practices and seek maintainability. Code will be covered and tested. The deployment will be effortless. Dependencies will be reasonable and integrated with version control and/or software packaging services.
 
+
 # Installation
-=============
 
 1. Use your OS package manager ([Homebrew](http://mxcl.github.com/homebrew/) recommended, on OS X) to install GCC
 2. Install [RVM](https://rvm.io/)
@@ -24,15 +24,13 @@ LibraryToGo will be developed using contemporary open source practices and seek 
 8. Use Rails to initialize your databases with `bundle exec rake db:setup` and `bundle exec rake db:test:clone`
 
 # Testing
-=============
 
 This codebase supports the Test Driven Development methodology. Use `bundle exec guard start` to watch your filesystem while making changes.
 
 This codebase can provide code coverage analysis. Use `COVERAGE=true bundle exec rake spec` to run the full spec suite with metrics reported in `/coverage/index.html`.
 
-# Design
-=============
 
+# Design
 
 ## Considerations
 
@@ -44,10 +42,12 @@ This codebase can provide code coverage analysis. Use `COVERAGE=true bundle exec
 * Users need persistable and replaceable authentication tokens, as ID cards get lost
 * This facilitates in-real-life operations; (almost) everything relates to timings and quantities
 
+
 ## Privacy concerns
 
 * aggregate counts are generally not sensitive (number of times record X has done Y) and can be stored with their parent record
 * any record that serializes users’ actions should be sensitive (reads should be restricted to privileged users) and the structure of this serialization allows class-level restrictions
+
 
 ## Feature TODOs
 
@@ -66,6 +66,7 @@ This codebase can provide code coverage analysis. Use `COVERAGE=true bundle exec
 * check in
 * holds
 
+
 ## Features integrated
 
 * users and authentication — [Devise](https://rubygems.org/gems/devise)
@@ -74,6 +75,7 @@ This codebase can provide code coverage analysis. Use `COVERAGE=true bundle exec
 * pagination — [will_paginate](https://rubygems.org/gems/will_paginate)
 * scheduling — [clockwork](https://rubygems.org/gems/clockwork)
 * testing — [Guard](https://rubygems.org/gems/guard) dispatches [RSpec](https://rubygems.org/gems/rspec) through [spork](https://rubygems.org/gems/spork)
+
 
 ## Feature wants
 
