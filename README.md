@@ -18,7 +18,7 @@ LibraryToGo will be developed using contemporary open source practices and seek 
 1. Use your OS package manager ([Homebrew](http://mxcl.github.com/homebrew/) recommended, on OS X) to install GCC
 2. Install [RVM](https://rvm.io/)
 3. Use RVM to install the zlib, ncurses, readline, openssl and iconv packages
-4. Use your OS package manager to install PostgreSQL, Sphinx, ImageMagick
+4. Use your OS package manager to install PostgreSQL, Sphinx (with PostgreSQL support), and ImageMagick
 5. Use RVM to accept and install this repository’s .rvmrc file
 6. Use [Bundler](http://gembundler.com/) to install the Rubygems for this repository
 7. Create `config/database.yml` from `config/database.example.yml` and edit it for values on your system
@@ -33,6 +33,13 @@ This codebase can provide code coverage analysis. Use `COVERAGE=true bundle exec
 
 # Design
 
+## Modules (planned)
+
+* Circulation — checking materials out and in, by staff and patrons
+* Cataloging — includes serials
+* OPAC — public-facing website
+* Admin — management of various high level records and configurations
+
 ## Considerations
 
 * User privacy is important, as what they view, search for, and circulate is sensitive information
@@ -46,7 +53,8 @@ This codebase can provide code coverage analysis. Use `COVERAGE=true bundle exec
 
 ## Privacy concerns
 
-* aggregate counts are generally not sensitive (number of times record X has done Y) and can be stored with their parent record
+* all personally-identifying information is assumed wholly private; only the least amount of information shall be exposed through public posts like comments and reviews
+* aggregate counts are generally not sensitive (n-many times a record has performed x-many actions) and can be stored with their parent record
 * any record that serializes users’ actions should be sensitive (reads should be restricted to privileged users) and the structure of this serialization allows class-level restrictions
 
 
