@@ -1,44 +1,65 @@
 source 'http://rubygems.org'
-gem 'pg'
+# core
 gem 'rails', '3.2.6'
 gem 'rack'
+gem 'nokogiri'
+gem 'prawn'
+gem 'sprockets'
+gem 'unicorn'
+
+# db
+#gem 'pg'
+gem 'mongoid'
+
+# extension
+gem 'json'
+
+# auth/roles
 gem 'devise'
 gem 'devise-encryptable'
+gem 'omniauth'
 gem 'cancan'
 gem 'cantango'
+
+# media
+gem 'sass'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
-gem 'faker'
-gem 'omniauth'
-gem 'thinking-sphinx'
-gem 'unicorn'
+gem 'paperclip'
+gem 'ruport'
+gem 'rmagick'
+
+# misc
+gem 'state_machine'
+gem 'settingslogic'
+gem 'paper_trail'
+
+# automation
 gem 'sidekiq'
 gem 'clockwork'
 gem 'sinatra'
-gem 'nokogiri'
-gem 'date_validator'
-gem 'paper_trail'
-gem 'paperclip'
-gem 'prawn'
-gem 'sprockets'
-gem 'slim-rails'
-gem 'json'
-gem 'will_paginate'
-gem 'settingslogic'
-gem 'state_machine'
+
+# search
+gem 'thinking-sphinx'
+
+# tag/category
 gem 'acts-as-taggable-on'
+
+# formatting/validation
+gem 'date_validator'
+
+# front end
+gem 'slim-rails'
+gem 'will_paginate'
 gem 'jquery-rails'
 gem 'linguistics'
 gem 'i18n'
-gem 'sass'
 gem 'fb_graph'
 gem 'linkedin'
 gem 'calendar_date_select'
 gem 'refinerycms'
 gem 'formtastic'
 gem 'datagrid'
-gem 'ruport'
-gem 'rmagick'
 gem 'rqrcode'
 gem 'googlecharts'
 gem 'prism'
@@ -60,16 +81,17 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_girl'
-  gem 'factory_girl_rails'
-  gem 'rspec-rails'
-  gem 'thin'
   gem 'spork-rails'
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'terminal-notifier-guard'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'thin'
 end
 
 group :test do
@@ -87,4 +109,3 @@ group :test do
   gem 'json_spec'
   gem 'prickle'
 end
-

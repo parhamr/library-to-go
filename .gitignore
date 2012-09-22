@@ -15,6 +15,7 @@ db/sphinx/*
 db/dump*
 
 # sensitive configs
+build
 config/database.yml
 config/api_keys.yml
 config/*.sphinx.conf

@@ -19,6 +19,7 @@ LibraryToGo::Application.routes.draw do
   end
 
   namespace :admin do
+    match '/' => 'static#index'
     match 'home' => 'static#index'
     resources :users
     resources :pages

@@ -1,0 +1,26 @@
+development:
+  sessions:
+    default:
+      database: library_to_go_development
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :eventual
+  options:
+    # Enable the identity map, needed for eager loading. (default: false)
+    identity_map_enabled: true
+
+    # Raise an error when defining a scope with the same name as an
+    # existing method. (default: false)
+    scope_overwrite_exception: true
+
+    # Ensure all times are UTC in the app side. (default: false)
+    use_utc: true
+test:
+  sessions:
+    default:
+      database: library_to_go_test
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :strong

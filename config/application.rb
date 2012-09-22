@@ -12,6 +12,15 @@ module LibraryToGo
   class Application < Rails::Application
     config.plugins = [:ssl_requirement]
 
+    config.generators do |g|
+      # g.orm :active_record
+      g.orm :mongoid
+      g.template_engine :slim
+      # g.stylesheets false
+      g.test_framework  :rspec, fixture: false
+      g.fixture_replacement :factory_girl, dir: "spec/factories"
+    end
+
     #config.active_record.observers = :cacher
     config.i18n.default_locale = :en
     config.encoding = "utf-8"
@@ -30,7 +39,6 @@ module LibraryToGo
 
     config.after_initialize do
       API_KEYS = YAML.load_file("#{::Rails.root}/config/api_keys.yml")[::Rails.env] unless defined?(API_KEYS) == 'constant'
-      
       ActsAsTaggableOn.force_lowercase = true
     end
   end

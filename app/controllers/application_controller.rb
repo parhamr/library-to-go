@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def require_role(role=nil)
     return true if current_user.present? && current_user.role?(role)
-    raise 403
+    render :text => '401', :status => 401
   end
 
 end

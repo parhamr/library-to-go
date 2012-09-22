@@ -177,6 +177,12 @@ GEM
       sqlite3 (~> 1.3)
       thin (~> 1.2)
     mime-types (1.19)
+    mongoid (3.0.4)
+      activemodel (~> 3.1)
+      moped (~> 1.1)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.22)
+    moped (1.2.0)
     multi_json (1.3.6)
     multi_xml (0.5.1)
     net-scp (1.0.4)
@@ -191,6 +197,7 @@ GEM
     omniauth (1.1.0)
       hashie (~> 1.2)
       rack
+    origin (1.0.6)
     orm_adapter (0.4.0)
     paper_trail (2.6.3)
       activerecord (~> 3.0)
@@ -207,7 +214,6 @@ GEM
     pdf-writer (1.1.8)
       color (>= 1.4.0)
       transaction-simple (~> 1.3)
-    pg (0.14.0)
     polyglot (0.3.3)
     prawn (0.12.0)
       pdf-reader (>= 0.9.0)
@@ -415,11 +421,11 @@ DEPENDENCIES
   linguistics
   linkedin
   mailcatcher
+  mongoid
   nokogiri
   omniauth
   paper_trail
   paperclip
-  pg
   prawn
   prickle
   prism
