@@ -34,7 +34,7 @@ class Admin::PagesController < Admin::BaseController
 
   def create
     @page = Page.new(params[:page])
-
+    
     respond_to do |format|
       if @page.save
         format.html { redirect_to admin_page_url(@page), notice: 'Page was successfully created.' }

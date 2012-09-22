@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Admin::RolesController do
-  let(:admin_role) { Role.find_by_name('admin') }
-  let(:member_role) { Role.find_by_name('member') }
+  let(:admin_role) { Role.where(name: 'admin').first || create(:admin_role) }
+  let(:member_role) { Role.where(name: 'member').first || create(:member_role) }
 
   context "as admin" do
     let(:user) { create(:admin) }

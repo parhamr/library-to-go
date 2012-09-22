@@ -29,6 +29,8 @@ Spork.prefork do
   VCR.configure do |c|
     c.cassette_library_dir = 'spec/fixtures/cassettes'
     c.hook_into :webmock
+    c.ignore_localhost = true
+    c.default_cassette_options = { record: :none }
   end
 
   # Allow VCR work side-by-side with webmock
@@ -51,10 +53,12 @@ Spork.prefork do
     # Database cleaner!
     # https://gist.github.com/1793911
     config.before(:suite) do
+      load "#{Rails.root}/db/seeds.rb"
+      WebMock.disable_net_connect!(allow_localhost: true)
       DatabaseCleaner.orm = "mongoid"
       DatabaseCleaner.clean_with :truncation
       DatabaseCleaner.strategy = :truncation
-      load "#{Rails.root}/db/seeds.rb"
+      #load "#{Rails.root}/db/seeds.rb"
     end
 
     config.before(:each) do
@@ -68,8 +72,8 @@ Spork.prefork do
 
     config.include Paperclip::Shoulda::Matchers
     config.include FactoryGirl::Syntax::Methods
-    config.include Devise::TestHelpers, :type => :controller
-    config.include Devise::TestHelpers, :type => :helper
+    config.include Devise::TestHelpers, type: :controller
+    config.include Devise::TestHelpers, type: :helper
     config.include JsonSpec::Helpers
   end
 end

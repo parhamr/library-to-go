@@ -11,20 +11,21 @@ FactoryGirl.define do
     password_confirmation 'password'
 
     trait(:member) do
-      after(:create) { |user, ev| user.roles << Role.where(:name => 'member').first }
+      after(:create) do |user, ev|
+        user.roles << (Role.where(:name => 'member').first || create(:member_role))
+        user.save!
+      end
     end
 
     trait(:admin) do
-      after(:create) { |user, ev| user.roles << Role.where(:name => 'admin').first }
+      after(:create) do |user, ev|
+        user.roles << (Role.where(:name => 'admin').first || create(:admin_role))
+        user.save!
+      end
     end
 
     trait(:located) do
-      #address1       { Faker::Address.street_address }
-      #address2       { Faker::Address.secondary_address }
-      #locality       { Faker::Address.city }
-      #region         { Faker::Address.state }
-      #postal_code    { Faker::Address.zip_code }
-      #country        'USA'
+      # associate an address!
       time_zone      'Pacific Time (US & Canada)'
     end
 

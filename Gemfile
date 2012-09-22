@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 # core
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 gem 'rack'
 gem 'nokogiri'
 gem 'prawn'
@@ -97,6 +97,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'terminal-notifier-guard'
+  gem 'rb-fsevent'
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'rspec-rails'

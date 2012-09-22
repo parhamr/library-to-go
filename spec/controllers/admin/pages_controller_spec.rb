@@ -4,8 +4,9 @@ require 'spec_helper'
 
 describe Admin::PagesController do
 
-  let(:page) { create(:page) }
-  let(:valid_attributes) { attributes_for(:page) }
+  let(:page) { create(:page_with_slug) }
+  let(:valid_attributes) { attributes_for(:page_with_slug) }
+  let(:invalid_attributes) { attributes_for(:page) }
 
   context "as admin" do
     let(:user) { create(:admin) }
@@ -104,14 +105,12 @@ describe Admin::PagesController do
 
       describe "with invalid params" do
         it "assigns the page as @page" do
-          Page.any_instance.stub(:save).and_return(false)
-          put :update, {:id => page.to_param, :page => {}}
+          put :update, {:id => page.to_param, :page => {title: ''}}
           assigns(:page).should eq(page)
         end
 
         it "re-renders the 'edit' template" do
-          Page.any_instance.stub(:save).and_return(false)
-          put :update, {:id => page.to_param, :page => {}}
+          put :update, {:id => page.to_param, :page => {title: ''}}
           response.should render_template("edit")
         end
       end
@@ -119,6 +118,7 @@ describe Admin::PagesController do
 
     describe "DELETE destroy" do
       it "destroys the requested page" do
+        page
         expect {
           delete :destroy, {:id => page.to_param}
         }.to change(Page, :count).by(-1)

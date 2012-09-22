@@ -5,7 +5,16 @@ class Page
   include Mongoid::Timestamps
   include Mongoid::Versioning
   max_versions 10
-  #include Mongoid::Taggable
+  
+  field :title, type: String
+  field :slug, type: String
+  field :contents, type: String
+  field :visible_at, type: Time
+  field :hidden_at, type: Time
+  field :state, type: String, default: 'new'
+
+  attr_accessible :title, :contents, :visible_at, :hidden_at
+  attr_accessible :slug, as: :root
 
   # STATE MACHINE
   state_machine :initial => :new do
@@ -23,7 +32,7 @@ class Page
     end
   end
   
-  validates :title, :state, :presence => true
+  validates :title, :state, presence: true, allow_blank: false
   validates :slug, :presence => true,
               :if => :approved?
   validates :slug, :uniqueness => true,
@@ -38,17 +47,19 @@ class Page
           :allow_nil => true
   
   scope :approved, where(:state => 'approved')
-  scope :visible_now, lambda {
+  scope :visible_now, lambda do
     where(["(visible_at IS NULL OR visible_at >= ?) AND (hidden_at IS NULL or hidden_at <= ?", Time.now, Time.now])
-  }
-  scope :visible_to_roles, lambda { |roles|
+  end
+  scope :visible_to_roles, lambda do |roles|
     tagged_with(roles, :on => :visible_to_roles, :any => true)
-  }
+  end
+
+  default_scope { approved.visible_now }
 
   # INSTANCE METHODS
 
   def slug=(str=nil)
-    write_attribute(:slug, str.try(:downcase).try(:strip))
+    self[:slug] = str.try(:downcase).try(:strip)
   end
   
 end

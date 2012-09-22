@@ -7,15 +7,14 @@ describe "Admin/Pages" do
   context "as admin" do
 
     before(:each) do
-      @user = @user ||= create(:admin)
-      sign_in @user
+      @user ||= create(:admin)
+      sign_in_as @user
     end
 
     describe "GET /admin/pages" do
       it "works! (now write some real specs)" do
-        # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-        get admin_pages_path
-        response.status.should be(200)
+        visit admin_pages_path
+        page.status_code.should be(200)
       end
     end
     

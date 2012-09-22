@@ -9,7 +9,12 @@ describe User do
   it { should validate_presence_of(:first_name) }
   it { should validate_presence_of(:last_name) }
 
-  it { should have_and_belong_to_many(:roles) }
+  it { should have_and_belong_to_many(:roles).of_type(Role) }
+
+  it { should allow_mass_assignment_of(:first_name) }
+  it { should allow_mass_assignment_of(:last_name) }
+
+  it { should have_index_for(email: 1).with_options(unique: true, background: true) }
 
   describe "instance method" do
     subject { create(:user) }
@@ -25,6 +30,11 @@ describe User do
     describe "#email=" do
       it 'strips whitespace' do
         subject.email = 'test@example.org '
+        subject.email.should == 'test@example.org'
+      end
+
+      it 'downcases' do
+        subject.email = 'TEST@example.org '
         subject.email.should == 'test@example.org'
       end
 
@@ -109,17 +119,17 @@ describe User do
     context "for languages" do
       let(:languages) { 'english, klingon' }
       it "are empty by default" do
-        subject.language_list.should == []
+        subject.languages.should == nil
       end
 
       it "allows users to identify relevant languages" do
-        subject.language_list = languages
-        subject.language_list.should == ['english','klingon']
+        subject.languages = languages
+        subject.languages.should == ['english','klingon']
       end
 
       it "enables lookups on relevant languages" do
-        subject.update_attributes({:language_list => languages}, :without_protection => true)
-        User.tagged_with('klingon', :on => :languages).should == [subject]
+        subject.update_attributes({:languages => languages}, :without_protection => true)
+        User.where(languages: 'klingon').all.should == [subject]
       end
 
     end

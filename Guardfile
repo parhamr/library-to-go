@@ -11,7 +11,7 @@ guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test'}, :wait => 30, :cucumber =>
   watch(%r{^config/environments/.+\.rb$})
   watch(%r{^config/initializers/.+\.rb$})
   watch('spec/spec_helper.rb') { :rspec }
-  watch(%r{^spec/factories/(.+)\.rb$})
+  #watch(%r{^spec/factories/(.+)\.rb$})
 end
 
 guard 'rspec', :version => 2, :cli => '--drb', :focus => true, :all_on_start => false, :all_after_pass => false, :keep_failed => false do
