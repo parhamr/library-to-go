@@ -10,16 +10,25 @@ gem 'unicorn'
 # db
 #gem 'pg'
 gem 'mongoid'
+gem 'mongo'
+gem 'bson'
+gem 'bson_ext'
 
 # extension
 gem 'json'
+
+# cache
+gem 'hiredis'
+gem 'redis', require: [ 'redis/connection/hiredis', 'redis' ]
+gem 'redis-rails'
 
 # auth/roles
 gem 'devise'
 gem 'devise-encryptable'
 gem 'omniauth'
 gem 'cancan'
-gem 'cantango'
+#gem 'cantango'
+#gem 'cantango-permits'
 
 # media
 gem 'sass'
@@ -32,7 +41,8 @@ gem 'rmagick'
 # misc
 gem 'state_machine'
 gem 'settingslogic'
-gem 'paper_trail'
+gem 'carmen'
+gem 'linefit'
 
 # automation
 gem 'sidekiq'
@@ -43,7 +53,7 @@ gem 'sinatra'
 gem 'thinking-sphinx'
 
 # tag/category
-gem 'acts-as-taggable-on'
+gem 'mongoid_taggable'
 
 # formatting/validation
 gem 'date_validator'
@@ -95,6 +105,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'mongoid-rspec'
   gem 'rspec-pride'
   gem 'webmock'
   gem 'vcr'

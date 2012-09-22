@@ -1,10 +1,15 @@
 # encoding: utf-8
 
-class Role < ActiveRecord::Base
+class Role
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  field :name, :type => String
 
   has_and_belongs_to_many :users,
-                            :readonly => true,
-                            :validate => false
+                            :autosave => false,
+                            :validate => false,
+                            :index => true
 
   attr_accessible :name, :description, :as => :root
 
@@ -13,7 +18,7 @@ class Role < ActiveRecord::Base
 
   def name=(str=nil)
     # remove whitespace
-    write_attribute(:name, str.try(:strip))
+    self[:name] = str.try(:strip)
   end
 
 end

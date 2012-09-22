@@ -1,6 +1,11 @@
 # encoding: utf-8
 
-class Page < ActiveRecord::Base
+class Page
+  include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Versioning
+  max_versions 10
+  #include Mongoid::Taggable
 
   # STATE MACHINE
   state_machine :initial => :new do
@@ -17,11 +22,7 @@ class Page < ActiveRecord::Base
       transition [:pending_review, :approved] => :rejected
     end
   end
-
-  acts_as_taggable_on :tags, :visible_to_roles
   
-  attr_accessible :contents, :slug, :title, :hidden_at, :visible_at, :state
-
   validates :title, :state, :presence => true
   validates :slug, :presence => true,
               :if => :approved?

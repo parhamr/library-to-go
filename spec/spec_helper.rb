@@ -46,17 +46,20 @@ Spork.prefork do
     config.order = "random"
     config.mock_with :rspec
     config.use_transactional_fixtures = false
+    config.include Mongoid::Matchers
     
     # Database cleaner!
     # https://gist.github.com/1793911
     config.before(:suite) do
+      DatabaseCleaner.orm = "mongoid"
       DatabaseCleaner.clean_with :truncation
-      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.strategy = :truncation
       load "#{Rails.root}/db/seeds.rb"
     end
 
     config.before(:each) do
       DatabaseCleaner.start
+      Mongoid::IdentityMap.clear
     end
 
     config.after(:each) do

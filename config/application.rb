@@ -2,7 +2,12 @@
 
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+#require 'rails/all'
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "active_resource/railtie"
+#require "rails/test_unit/railtie"
+require "sprockets/railtie"
 
 if defined?(Bundler)
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -19,6 +24,8 @@ module LibraryToGo
       # g.stylesheets false
       g.test_framework  :rspec, fixture: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
+      g.view_specs false
+      g.helper_specs false
     end
 
     #config.active_record.observers = :cacher
@@ -30,7 +37,7 @@ module LibraryToGo
 
     config.active_support.escape_html_entities_in_json = true
 
-    config.active_record.whitelist_attributes = true
+    #config.active_record.whitelist_attributes = true
 
     config.assets.enabled = true
 
@@ -39,7 +46,6 @@ module LibraryToGo
 
     config.after_initialize do
       API_KEYS = YAML.load_file("#{::Rails.root}/config/api_keys.yml")[::Rails.env] unless defined?(API_KEYS) == 'constant'
-      ActsAsTaggableOn.force_lowercase = true
     end
   end
 end
