@@ -45,7 +45,7 @@ class User
   field :first_name, type: String
   field :last_name, type: String
   field :company, type: String
-  field :birthday, type: Time
+  field :birthday, type: Date
   field :time_zone, type: String
   field :languages, type: Array
 
