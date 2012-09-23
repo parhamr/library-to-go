@@ -15,6 +15,8 @@ end
 
 module LibraryToGo
   class Application < Rails::Application
+    config.autoload_paths += %W(#{Rails.root}/app/presenters)
+
     config.plugins = [:ssl_requirement]
 
     config.generators do |g|

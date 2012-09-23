@@ -12,10 +12,14 @@ describe Role do
 
   it { should allow_mass_assignment_of(:name).as(:root) }
   
-  describe "#name=" do
-    it 'strips whitespace' do
-      subject.name = 'test '
-      subject.name.should == 'test'
+  describe '[instance]' do
+
+    describe "#name=" do
+      it 'strips whitespace' do
+        subject.name = 'test '
+        subject.name.should == 'test'
+      end
     end
+
   end
 end

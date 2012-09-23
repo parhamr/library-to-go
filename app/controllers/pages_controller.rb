@@ -7,7 +7,7 @@ class PagesController < ApplicationController
   end
 
   def show
-    @page = Page.where(slug: params[:slug].downcase).first
+    @page = Page.where(slug: params[:slug]).first
 
     respond_to do |format|
       format.html # show.html.erb

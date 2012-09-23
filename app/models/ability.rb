@@ -9,7 +9,7 @@ class Ability
     user ||= User.new
 
     # update your own account
-    can [:update], User, :id => user.id unless user.new_record?
+    can [:update], User, id: user.id unless user.new_record?
 
     if user.role?('admin')
       # create and update anything

@@ -11,11 +11,11 @@ FactoryGirl.define do
     end
 
     trait(:with_slug) do
-      slug { Faker::Lorem.words.to_sentence }
+      slug { title }
     end
 
-    factory :approved_page, :traits => [:approved]
-    factory :page_with_slug, :traits => [:with_slug]
+    factory :approved_page, traits: [:with_slug, :approved]
+    factory :page_with_slug, traits: [:with_slug]
   end
 
 end

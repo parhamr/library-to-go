@@ -9,21 +9,21 @@ describe Admin::PagesController do
   let(:invalid_attributes) { attributes_for(:page) }
 
   context "as admin" do
-    let(:user) { create(:admin) }
+    let(:admin) { create(:admin) }
 
     before(:each) do
-      sign_in user
+      sign_in admin
     end
 
     after :each do
-      sign_out user
+      sign_out admin
     end
 
     describe "GET index" do
       it "assigns all pages as @pages" do
         page
         get :index
-        assigns(:pages).should eq([page])
+        assigns(:pages).all.entries.should eq([page])
       end
     end
 
@@ -53,7 +53,7 @@ describe Admin::PagesController do
         it "creates a new Page" do
           expect {
             post :create, {:page => valid_attributes}
-          }.to change(Page, :count).by(1)
+          }.to change(Page.unscoped, :count).by(1)
         end
 
         it "assigns a newly created page as @page" do
@@ -64,7 +64,7 @@ describe Admin::PagesController do
 
         it "redirects to the created page" do
           post :create, {:page => valid_attributes}
-          response.should redirect_to(admin_page_url(Page.last))
+          response.should redirect_to(admin_page_url(Page.unscoped.last))
         end
       end
 
@@ -88,7 +88,7 @@ describe Admin::PagesController do
     describe "PUT update" do
       describe "with valid params" do
         it "updates the requested page" do
-          Page.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+          Page.any_instance.should_receive(:update_attributes).with({'these' => 'params'}, {:as=>:root})
           put :update, {:id => page.to_param, :page => {'these' => 'params'}}
         end
 
@@ -121,10 +121,10 @@ describe Admin::PagesController do
         page
         expect {
           delete :destroy, {:id => page.to_param}
-        }.to change(Page, :count).by(-1)
+        }.to change(Page.unscoped, :count).by(-1)
       end
 
-      it "redirects to the pages list" do
+      it "redirects to the pages list" do\
         delete :destroy, {:id => page.to_param}
         response.should redirect_to(admin_pages_url)
       end

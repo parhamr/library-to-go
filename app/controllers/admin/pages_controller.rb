@@ -2,7 +2,7 @@
 
 class Admin::PagesController < Admin::BaseController
   def index
-    @pages = Page.all
+    @pages = Page.unscoped.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,7 +11,7 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def show
-    @page = Page.find(params[:id])
+    @page = Page.unscoped.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,7 +29,7 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def edit
-    @page = Page.find(params[:id])
+    @page = Page.unscoped.find(params[:id])
   end
 
   def create
@@ -47,10 +47,10 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def update
-    @page = Page.find(params[:id])
+    @page = Page.unscoped.find(params[:id])
 
     respond_to do |format|
-      if @page.update_attributes(params[:page])
+      if @page.update_attributes(params[:page], as: :root)
         format.html { redirect_to admin_page_url(@page), notice: 'Page was successfully updated.' }
         format.json { head :no_content }
       else
@@ -61,7 +61,7 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def destroy
-    @page = Page.find(params[:id])
+    @page = Page.unscoped.find(params[:id])
     @page.destroy
 
     respond_to do |format|

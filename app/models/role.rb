@@ -18,7 +18,7 @@ class Role
 
   def name=(str=nil)
     # remove whitespace
-    self[:name] = str.try(:strip)
+    self[:name] = str.try(:strip).try(:downcase)
   end
 
 end
