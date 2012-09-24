@@ -11,17 +11,57 @@ class Item
   # An account of the resource.
   field :description, type: String
   # The file format, physical medium, or dimensions of the resource.
-  field :format, type: String
-  field :identifier, type: String
+  field :format, type: Hash
+  field :identifier, type: Hash
   field :language, type: String
   field :rights, type: String
   field :title, type: Array
   field :type, type: String
+  field :state, type: String, default: 'new'
   
-  # The topic of the resource.
-  has_and_belongs_to_many :subjects
-  has_and_belongs_to_many :creators
-  has_and_belongs_to_many :publishers
-  has_and_belongs_to_many :contributors
+  #has_and_belongs_to_many :subjects, validate: false
+  #has_and_belongs_to_many :creators, validate: false
+  #has_and_belongs_to_many :publishers, validate: false
+  #has_and_belongs_to_many :contributors, validate: false
+
+  has_many :item_instances,
+            :validate   => false,
+            :dependent  => :destroy,
+            :autosave   => false
+
+  validates :title, :language, :type, :presence => true
+
+  def quantity(force = false)
+    {
+      :quantity_circulatable  => quantity_circulatable(force),
+      :quantity_damaged       => quantity_damaged(force),
+      :quantity_reserved      => quantity_reserved(force),
+      :quantity_total         => quantity_total(force),
+    }.with_indifferent_access
+  end
+
+  def quantity_circulatable(force = false)
+    # http://mongoid.org/en/mongoid/docs/querying.html
+    # length is cached, count hits the DB
+    quantity_total(force) - quantity_reserved(force) - quantity_damaged(force)
+  end
+
+  def quantity_damaged(force = false)
+    # http://mongoid.org/en/mongoid/docs/querying.html
+    # length is cached, count hits the DB
+    item_instances.damaged.send(!!force ? :length : :count)
+  end
+
+  def quantity_reserved(force = false)
+    # http://mongoid.org/en/mongoid/docs/querying.html
+    # length is cached, count hits the DB
+    item_instances.reserved.send(!!force ? :length : :count)
+  end
+
+  def quantity_total(force = false)
+    # http://mongoid.org/en/mongoid/docs/querying.html
+    # length is cached, count hits the DB
+    item_instances.send(!!force ? :length : :count)
+  end
 
 end
