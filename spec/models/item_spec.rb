@@ -12,6 +12,8 @@ describe Item do
   describe '[instance]' do
 
     subject { create(:item) }
+    let(:book_with_one_instance) { create(:book, :with_one_instance) }
+    let(:book_with_damage) { create(:book, :with_damage) }
 
     describe '#title' do
 
@@ -44,7 +46,9 @@ describe Item do
         subject.quantity_circulatable.should be_a(Fixnum)
       end
 
-      it 'counts the number of associated ItemInstance records that are circulatable'
+      it 'counts the number of associated ItemInstance records that are circulatable' do
+        book_with_damage.quantity_circulatable.should eq 0
+      end
     end
 
     describe '#quantity_damaged' do
@@ -52,7 +56,10 @@ describe Item do
         subject.quantity_damaged.should be_a(Fixnum)
       end
 
-      it 'counts the number of associated ItemInstance records that are damaged'
+      it 'counts the number of associated ItemInstance records that are damaged' do
+        book_with_one_instance.quantity_damaged.should eq 0
+        book_with_damage.quantity_damaged.should eq 1
+      end
     end
 
     describe '#quantity_reserved' do
@@ -60,7 +67,10 @@ describe Item do
         subject.quantity_reserved.should be_a(Fixnum)
       end
 
-      it 'counts the number of associated ItemInstance records that are reserved'
+      it 'counts the number of associated ItemInstance records that are reserved' do
+        book_with_one_instance.quantity_reserved.should eq 0
+        book_with_damage.quantity_reserved.should eq 0
+      end
     end
 
     describe '#quantity_total' do
@@ -68,7 +78,10 @@ describe Item do
         subject.quantity_total.should be_a(Fixnum)
       end
 
-      it 'counts the number of associated ItemInstance records'
+      it 'counts the number of associated ItemInstance records' do
+        book_with_one_instance.quantity_total.should eq 1
+        book_with_damage.quantity_total.should eq 1
+      end
     end
 
     context 'for a book' do

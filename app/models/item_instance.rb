@@ -9,16 +9,19 @@ class ItemInstance
   field :last_seen_at, type: Time
   field :last_circulated_at, type: Time
 
-  CONDITION_VALUES_CIRCULATING = {
+  CONDITIONS_CIRCULATING = {
     :new          => 'new',
     :good         => 'good',
     :fair         => 'fair',
   }.with_indifferent_access.freeze
-  CONDITION_VALUES_NONCIRCULATING = {
+  CONDITIONS_NONCIRCULATING = {
     :damaged      => 'damaged',
     :lost         => 'lost',
   }.with_indifferent_access.freeze
-  CONDITION_VALUES = CONDITION_VALUES_CIRCULATING.merge(CONDITION_VALUES_NONCIRCULATING)
+  CONDITIONS = {}.
+                merge(CONDITIONS_CIRCULATING).
+                merge(CONDITIONS_NONCIRCULATING).with_indifferent_access
+  CONDITION_VALUES = CONDITIONS.keys
 
   STATUS_VALUES = {
     :reserved => 'reserved',
@@ -29,8 +32,8 @@ class ItemInstance
 
   validates :condition, :presence => true
 
-  scope :damaged, lambda { where(:condition => CONDITION_VALUES[:damaged]) }
-  scope :lost, lambda { where(:condition => CONDITION_VALUES[:lost]) }
+  scope :damaged, lambda { where(:condition => CONDITIONS_NONCIRCULATING[:damaged]) }
+  scope :lost, lambda { where(:condition => CONDITIONS_NONCIRCULATING[:lost]) }
   scope :reserved, lambda { where(:status => STATUS_VALUES[:reserved]) }
 
   def damaged

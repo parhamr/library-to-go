@@ -13,6 +13,19 @@ FactoryGirl.define do
     rights    { "© #{rand(1940..Time.now.year)} #{Faker::Company.name} All Rights Reserved" }
     language  'en'
     type      'foo'
+    # location
+    # attachments
+    # restrictions
+    # circulatable
+    # reservable
+
+    trait(:with_one_instance) do
+      after(:create) { |i| i.item_instances << create(:item_instance, :item => i) }
+    end
+
+    trait(:with_damage) do
+      after(:create) { |i| i.item_instances << create(:item_instance, :damaged, :item => i) }
+    end
 
     factory :book do
       type 'Text'
@@ -21,6 +34,8 @@ FactoryGirl.define do
         :illustrations => [true, false].sample,
         :type => 'book',
         }.with_indifferent_access }
+        # dimensions
+        # ISBN
     end
 
     factory :painting do

@@ -4,7 +4,11 @@ FactoryGirl.define do
 
   factory :item_instance do
     item
-    condition { Item::CONDITION_VALUES_CIRCULATING.sample }
+    condition { ItemInstance::CONDITIONS[:new] }
+
+    trait(:damaged) do
+      condition { ItemInstance::CONDITIONS[:damaged] }
+    end
   end
 
 end
