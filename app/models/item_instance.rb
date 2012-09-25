@@ -36,7 +36,7 @@ class ItemInstance
   scope :lost, lambda { where(:condition => CONDITIONS_NONCIRCULATING[:lost]) }
   scope :reserved, lambda { where(:status => STATUS_VALUES[:reserved]) }
 
-  def damaged
+  def damaged?
     condition === CONDITION_DAMAGED
   end
 

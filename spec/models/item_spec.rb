@@ -30,13 +30,21 @@ describe Item do
 
       context 'when cached' do
 
-        it 'fails to increment as item_instances are added'
+        it 'increments as item_instances are added' do
+          subject.quantity_total(false).should eq 0
+          expect { create(:item_instance, :item => subject) }.to change(ItemInstance, :count).by(1)
+          subject.quantity_total(false).should eq 0
+        end
 
       end
 
       context 'when not cached' do
 
-        it 'increments as item_instances are added'
+        it 'increments as item_instances are added' do
+          subject.quantity_total(true).should eq 0
+          expect { create(:item_instance, :item => subject) }.to change(ItemInstance, :count).by(1)
+          subject.quantity_total(true).should eq 1
+        end
 
       end
     end

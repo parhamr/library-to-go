@@ -33,10 +33,10 @@ class Item
 
   def quantity(force = false)
     {
-      :quantity_circulatable  => quantity_circulatable(force),
-      :quantity_damaged       => quantity_damaged(force),
-      :quantity_reserved      => quantity_reserved(force),
-      :quantity_total         => quantity_total(force),
+      :circulatable  => quantity_circulatable(force),
+      :damaged       => quantity_damaged(force),
+      :reserved      => quantity_reserved(force),
+      :total         => quantity_total(force),
     }.with_indifferent_access
   end
 
@@ -49,19 +49,19 @@ class Item
   def quantity_damaged(force = false)
     # http://mongoid.org/en/mongoid/docs/querying.html
     # length is cached, count hits the DB
-    item_instances.damaged.send(!!force ? :length : :count)
+    @quantity_damaged = ((force || !@quantity_damaged) ? item_instances.unscoped.damaged.count : @quantity_damaged)
   end
 
   def quantity_reserved(force = false)
     # http://mongoid.org/en/mongoid/docs/querying.html
     # length is cached, count hits the DB
-    item_instances.reserved.send(!!force ? :length : :count)
+    @quantity_reserved = ((force || !@quantity_reserved) ? item_instances.unscoped.reserved.count : @quantity_reserved)
   end
 
   def quantity_total(force = false)
     # http://mongoid.org/en/mongoid/docs/querying.html
     # length is cached, count hits the DB
-    item_instances.send(!!force ? :length : :count)
+    @quantity_total = ((force || !@quantity_total) ? item_instances.unscoped.count : @quantity_total)
   end
 
 end
