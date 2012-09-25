@@ -8,14 +8,6 @@ describe Page do
   subject { create(:page) }
   let(:page_with_slug) { create(:page_with_slug) }
 
-  describe "state machine" do
-    it "should default to 'new'" do
-      subject.state.should == 'new'
-      subject.state_name.should == :new
-    end
-
-  end
-
   describe "[instance]" do
 
     describe "#visible_at" do
@@ -80,21 +72,21 @@ describe Page do
 
         let(:page) { create(:approved_page, visible_at: nil, hidden_at: nil) }
         let(:page_with_timing) { create(:approved_page, visible_at: time_visible, hidden_at: time_hidden) }
-        let(:page_with_hidden) { create(:approved_page, visible_at: nil, hidden_at: time_hidden) }
-        let(:page_with_visible) { create(:approved_page, visible_at: time_visible, hidden_at: nil) }
+        let(:page_with_hidden_at) { create(:approved_page, visible_at: nil, hidden_at: time_hidden) }
+        let(:page_with_visible_at) { create(:approved_page, visible_at: time_visible, hidden_at: nil) }
 
         before do
           page.should be_valid
           page_with_timing.should be_valid
-          page_with_hidden.should be_valid
-          page_with_visible.should be_valid
+          page_with_hidden_at.should be_valid
+          page_with_visible_at.should be_valid
         end
 
         it "accurately finds pages before visibility" do
           Page.unscoped do
             Timecop.travel(time_before)
             Page.visible_now.count.should == 2
-            Page.visible_now.all.entries.should == [page, page_with_hidden]
+            Page.visible_now.all.entries.should == [page, page_with_hidden_at]
           end
         end
 
@@ -102,7 +94,7 @@ describe Page do
           Page.unscoped do
             Timecop.travel(time_within)
             Page.visible_now.count.should == 4
-            Page.visible_now.all.entries.should == [page, page_with_timing, page_with_hidden, page_with_visible]
+            Page.visible_now.all.entries.should == [page, page_with_timing, page_with_hidden_at, page_with_visible_at]
           end
         end
 
@@ -110,10 +102,36 @@ describe Page do
           Page.unscoped do
             Timecop.travel(time_after)
             Page.visible_now.count.should == 2
-            Page.visible_now.all.entries.should == [page, page_with_visible]
+            Page.visible_now.all.entries.should == [page, page_with_visible_at]
           end
         end
 
+      end
+
+    end
+
+  end
+
+  describe "state machine" do
+
+    context '[instance]' do
+      it "should default to 'new'" do
+        subject.state.should == 'new'
+        subject.state_name.should == :new
+      end
+
+      it "has transitions" do
+        subject.state_transitions.should be_a(Array)
+        subject.state_transitions.map(&:class).uniq.should == [StateMachine::Transition]
+      end
+
+    end
+
+    context '[class]' do
+      subject { Page }
+
+      it 'is integrated' do
+        subject.state_machines.should be_a(StateMachine::MachineCollection)
       end
 
     end
