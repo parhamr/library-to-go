@@ -31,12 +31,19 @@ gem 'cancan'
 #gem 'cantango-permits'
 
 # media
-gem 'sass'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'aws-sdk'
 gem 'paperclip'
 gem 'ruport'
 gem 'rmagick'
+
+# assets
+group :assets do
+  gem 'sass-rails'
+  gem 'compass-rails'
+  gem 'zurb-foundation'
+  # Add any compass extensions here
+end
 
 # misc
 gem 'state_machine'
