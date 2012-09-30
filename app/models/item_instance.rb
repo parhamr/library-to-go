@@ -11,13 +11,13 @@ class ItemInstance
   field :state, type: String, default: 'new'
 
   CONDITIONS_CIRCULATING = {
-    :new          => 'new',
-    :good         => 'good',
-    :fair         => 'fair',
+    new:          'new',
+    good:         'good',
+    fair:         'fair',
   }.with_indifferent_access.freeze
   CONDITIONS_NONCIRCULATING = {
-    :damaged      => 'damaged',
-    :lost         => 'lost',
+    damaged:      'damaged',
+    lost:         'lost',
   }.with_indifferent_access.freeze
   CONDITIONS = {}.
                 merge(CONDITIONS_CIRCULATING).
@@ -27,7 +27,7 @@ class ItemInstance
   belongs_to :item
   #belongs_to :location
 
-  validates :condition, :presence => true
+  validates :condition, inclusion: { in: CONDITION_VALUES }
 
   # STATE MACHINE
   state_machine initial: :new do
@@ -39,33 +39,47 @@ class ItemInstance
     event :enqueue do
       transition [:new] => :processing
     end
-    event :avail do
-      transition [:reserved, :loaned, :reserved] => :available
-    end
     event :process do
       transition [:new, :processing] => :available
     end
+    event :avail do
+      transition [:reserved, :loaned, :reserved, :withheld] => :available
+    end
     event :circulate do
-      transition [:available, :reserved] => :circulating
+      transition [:available, :reserved] => :circulating, if: lambda { |ii| ii.circulatable? }
     end
     event :reserve do
-      transition [:available] => :reserved
+      transition [:available] => :reserved, if: lambda { |ii| ii.circulatable? }
     end
     event :withhold do
-      transition [:available, :reserved] => :withheld
+      transition [:processing, :available, :reserved] => :withheld
     end
   end
 
-  scope :damaged, lambda { where(:condition => CONDITIONS_NONCIRCULATING[:damaged]) }
-  scope :lost, lambda { where(:condition => CONDITIONS_NONCIRCULATING[:lost]) }
-  scope :reserved, lambda { where(:status => STATUS_VALUES[:reserved]) }
+  scope :damaged, lambda { where(condition: CONDITIONS_NONCIRCULATING[:damaged]) }
+  scope :lost, lambda { where(condition: CONDITIONS_NONCIRCULATING[:lost]) }
+  scope :reserved, lambda { where(status: 'reserved') }
+
+  def lost!
+    update_attributes(condition: CONDITIONS_NONCIRCULATING[:lost])
+    withhold!
+  end
+
+  def lost?
+    condition === CONDITIONS_NONCIRCULATING[:lost]
+  end
+
+  def damaged!
+    update_attributes(condition: CONDITIONS_NONCIRCULATING[:damaged])
+    withhold!
+  end
 
   def damaged?
-    condition === CONDITION_DAMAGED
+    condition === CONDITIONS_NONCIRCULATING[:damaged]
   end
 
   def circulatable?
-    CONDITIONS_CIRCULATING.inclue?(condition)
+    CONDITIONS_CIRCULATING.values.include?(condition) && available?
   end
 
 end

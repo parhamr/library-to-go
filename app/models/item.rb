@@ -25,18 +25,19 @@ class Item
   #has_and_belongs_to_many :contributors, validate: false
 
   has_many :item_instances,
-            :validate   => false,
-            :dependent  => :destroy,
-            :autosave   => false
+            validate:   false,
+            dependent:  :destroy,
+            autosave:   false
 
-  validates :title, :language, :type, :presence => true
+  validates :title, :language, :type, presence: true
 
+  # TODO: cache this!
   def quantity(force = false)
     {
-      :circulatable  => quantity_circulatable(force),
-      :damaged       => quantity_damaged(force),
-      :reserved      => quantity_reserved(force),
-      :total         => quantity_total(force),
+      circulatable:  quantity_circulatable(force),
+      damaged:       quantity_damaged(force),
+      reserved:      quantity_reserved(force),
+      total:         quantity_total(force),
     }.with_indifferent_access
   end
 
