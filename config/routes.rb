@@ -30,7 +30,10 @@ LibraryToGo::Application.routes.draw do
     #resources :payments
   end
 
-  resources :users
+  resources :users do
+    resources :addresses
+  end
+
 
   controller :pages do
     get '/legal' => :legal

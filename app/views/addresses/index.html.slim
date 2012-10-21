@@ -1,0 +1,17 @@
+h1 Listing addresses
+
+table
+  tr
+    th
+    th
+    th
+
+  - @addresses.each do |address|
+    tr
+      td = link_to 'Show', address
+      td = link_to 'Edit', edit_address_path(address)
+      td = link_to 'Destroy', address, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Address', new_address_path
