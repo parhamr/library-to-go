@@ -56,18 +56,18 @@ Spork.prefork do
       load "#{Rails.root}/db/seeds.rb"
       WebMock.disable_net_connect!(allow_localhost: true)
       DatabaseCleaner.orm = "mongoid"
-      DatabaseCleaner.clean_with :truncation
-      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner["mongoid"].clean_with :truncation
+      DatabaseCleaner["mongoid"].strategy = :truncation
       #load "#{Rails.root}/db/seeds.rb"
     end
 
     config.before(:each) do
-      DatabaseCleaner.start
+      DatabaseCleaner["mongoid"].start
       Mongoid::IdentityMap.clear
     end
 
     config.after(:each) do
-      DatabaseCleaner.clean
+      DatabaseCleaner["mongoid"].clean
     end
 
     config.include Paperclip::Shoulda::Matchers
