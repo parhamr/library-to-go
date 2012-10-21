@@ -27,8 +27,6 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'omniauth'
 gem 'cancan'
-#gem 'cantango'
-#gem 'cantango-permits'
 
 # media
 gem 'aws-s3', :require => 'aws/s3'
@@ -50,6 +48,7 @@ gem 'state_machine'
 gem 'settingslogic'
 gem 'carmen'
 gem 'linefit'
+gem 'fastercsv'
 
 # automation
 gem 'sidekiq'
