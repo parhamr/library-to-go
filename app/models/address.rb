@@ -3,5 +3,6 @@ class Address
 
   embedded_in :user
   embedded_in :location
+  embedded_in :person
 
 end
