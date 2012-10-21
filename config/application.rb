@@ -20,11 +20,10 @@ module LibraryToGo
     config.plugins = [:ssl_requirement]
 
     config.generators do |g|
-      # g.orm :active_record
       g.orm :mongoid
       g.template_engine :slim
-      # g.stylesheets false
-      g.test_framework  :rspec, fixture: false
+      g.stylesheets false
+      g.test_framework  :rspec, fixture: true
       g.fixture_replacement :factory_girl, dir: "spec/factories"
       g.view_specs false
       g.helper_specs false
