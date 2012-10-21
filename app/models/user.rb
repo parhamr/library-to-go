@@ -54,6 +54,7 @@ class User
                             autosave: false,
                             validate: false,
                             index: true
+  embeds_many :addresses
 
   # SECURITY
   # these are exposed for mass-assignment
