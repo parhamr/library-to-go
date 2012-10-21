@@ -26,6 +26,8 @@ guard 'rspec', :version => 2, :cli => '--drb', :focus => true, :all_on_start => 
   watch(%r{^spec/support/(.+)\.rb$})                  { "spec" }
   watch('config/routes.rb')                           { "spec/routing" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
+  # FactoryGirl
+  watch(%r{^spec/factories/(.+)\.rb$})                { |m| "spec/support/factories/factory_spec.rb" }
   # Capybara request specs
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
 
