@@ -34,6 +34,9 @@ LibraryToGo::Application.routes.draw do
     resources :addresses
   end
 
+  resources :locations do
+    resources :addresses
+  end
 
   controller :pages do
     get '/legal' => :legal
