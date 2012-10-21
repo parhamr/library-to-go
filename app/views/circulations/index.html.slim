@@ -1,0 +1,17 @@
+h1 Listing circulations
+
+table
+  tr
+    th
+    th
+    th
+
+  - @circulations.each do |circulation|
+    tr
+      td = link_to 'Show', circulation
+      td = link_to 'Edit', edit_circulation_path(circulation)
+      td = link_to 'Destroy', circulation, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Circulation', new_circulation_path

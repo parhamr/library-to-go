@@ -1,0 +1,9 @@
+= form_for @circulation do |f|
+  - if @circulation.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@circulation.errors.count, "error")} prohibited this circulation from being saved:"
+      ul
+        - @circulation.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit 'Save'

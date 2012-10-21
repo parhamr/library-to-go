@@ -1,0 +1,2 @@
+module CirculationsHelper
+end

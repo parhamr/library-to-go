@@ -54,6 +54,14 @@ class User
                             autosave: false,
                             validate: false,
                             index: true
+  has_many :circulations,
+            validate: false,
+            autosave: false,
+            dependent: :nullify
+  belongs_to :default_location,
+              class_name: 'Location',
+              validate: false,
+              autosave: false
   embeds_many :addresses
 
   # SECURITY

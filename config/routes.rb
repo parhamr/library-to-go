@@ -24,22 +24,37 @@ LibraryToGo::Application.routes.draw do
     resources :users
     resources :pages
     resources :roles
+    resources :items do
+      resources :item_instances
+    end
+    resources :locations
+    resources :organizations
+    resources :people
     # TODO: payment integration
     #resources :purchases
     #resources :line_items
     #resources :payments
   end
 
+  resources :items do
+    resources :item_instances
+    resources :circulations
+  end
+
   resources :users do
     resources :addresses
+    resources :circulations
   end
 
   resources :locations do
     resources :addresses
+    get 'map'
   end
 
   resources :organizations do
     resources :locations
+    resources :circulations
+    get 'map'
   end
 
   resources :people do

@@ -25,7 +25,14 @@ class ItemInstance
   CONDITION_VALUES = CONDITIONS.keys
   
   belongs_to :item
-  #belongs_to :location
+  belongs_to :location,
+              validate: false,
+              autosave: false,
+              dependent: :nullify
+  has_many :circulations,
+            validate: false,
+            autosave: false,
+            dependent: :nullify
 
   validates :condition, inclusion: { in: CONDITION_VALUES }
 
