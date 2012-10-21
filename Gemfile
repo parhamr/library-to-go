@@ -27,8 +27,6 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'omniauth'
 gem 'cancan'
-#gem 'cantango'
-#gem 'cantango-permits'
 
 # media
 gem 'sass'
@@ -43,6 +41,7 @@ gem 'state_machine'
 gem 'settingslogic'
 gem 'carmen'
 gem 'linefit'
+gem 'fastercsv'
 
 # automation
 gem 'sidekiq'
