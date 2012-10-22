@@ -43,7 +43,7 @@ LibraryToGo::Application.routes.draw do
 
   resources :users do
     resources :addresses
-    resources :circulations
+    resources :circulations, only: [:index, :show, :destroy]
   end
 
   resources :locations do

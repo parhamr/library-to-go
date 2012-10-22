@@ -57,6 +57,9 @@ gem 'mongoid_taggable'
 # formatting/validation
 gem 'date_validator'
 
+# timing and calendaring
+gem 'has_schedule'
+
 # front end
 gem 'slim-rails'
 gem 'will_paginate'
