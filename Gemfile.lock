@@ -112,7 +112,7 @@ GEM
       json
       rack-oauth2 (>= 0.14.4)
       tzinfo
-    ffi (1.1.5)
+    ffi (1.11.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     googlecharts (1.6.8)
