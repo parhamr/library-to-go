@@ -209,9 +209,9 @@ GEM
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     oauth (0.4.7)
-    omniauth (1.1.1)
-      hashie (~> 1.2)
-      rack
+    omniauth (1.4.2)
+      hashie (>= 1.2, < 4)
+      rack (>= 1.0, < 3)
     origin (1.0.9)
     orm_adapter (0.4.0)
     paperclip (3.2.0)
